@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: handwritten-text-recognition
+Version: 0.0.0
+Summary: Handwritten text recognition
+Requires-Python: >=3.8
+Requires-Dist: numpy
+Requires-Dist: onnxruntime
+Requires-Dist: opencv-python
+Requires-Dist: scikit-learn
+Requires-Dist: editdistance
+Requires-Dist: path

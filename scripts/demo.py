@@ -17,7 +17,6 @@ for decoder in ['best_path', 'word_beam_search']:
     for img_filename in Path('../data').files('*.png'):
         print(f'Reading file {img_filename} with decoder {decoder}')
 
-        # read text
         img = cv2.imread(img_filename, cv2.IMREAD_GRAYSCALE)
         scale = sample_config[img_filename.basename()]['scale'] if img_filename.basename() in sample_config else 1
         margin = sample_config[img_filename.basename()]['margin'] if img_filename.basename() in sample_config else 0
@@ -26,12 +25,10 @@ for decoder in ['best_path', 'word_beam_search']:
                                line_clustering_config=LineClusteringConfig(min_words_per_line=2),
                                reader_config=ReaderConfig(decoder=decoder, prefix_tree=prefix_tree))
 
-        # output text
         for read_line in read_lines:
             print(' '.join(read_word.text for read_word in read_line))
         print()
 
-        # plot image with detections and texts as overlay
         plt.figure(f'Image: {img_filename} Decoder: {decoder}')
         plt.imshow(img, cmap='gray')
         for i, read_line in enumerate(read_lines):
