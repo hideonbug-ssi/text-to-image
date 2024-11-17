@@ -6,14 +6,14 @@ import numpy as np
 
 from .reader import read
 from .reader.ctc import PrefixTree
-from .word_detector import detect, sort_multiline, AABB
+from .word_detector import detect, sort_multiline, BoundingBox
 
 
 @dataclass
 class WordReadout:
     """Information about a read word: the readout and the bounding box."""
     text: str
-    aabb: AABB
+    aabb: BoundingBox
 
 
 @dataclass

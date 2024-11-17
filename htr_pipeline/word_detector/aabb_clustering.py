@@ -3,7 +3,7 @@ from collections import defaultdict
 import numpy as np
 from sklearn.cluster import DBSCAN
 
-from .aabb import AABB
+from .aabb import BoundingBox
 from .iou import compute_dist_mat
 
 
@@ -27,6 +27,6 @@ def cluster_aabbs(aabbs):
         xmax = np.median([aabb.xmax for aabb in curr_cluster])
         ymin = np.median([aabb.ymin for aabb in curr_cluster])
         ymax = np.median([aabb.ymax for aabb in curr_cluster])
-        res_aabbs.append(AABB(xmin, xmax, ymin, ymax))
+        res_aabbs.append(BoundingBox(xmin, xmax, ymin, ymax))
 
     return res_aabbs

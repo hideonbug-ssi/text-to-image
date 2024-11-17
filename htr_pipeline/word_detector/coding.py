@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
 
-from .aabb import AABB
-
+from .aabb import BoundingBox
 
 class MapOrdering:
     """order of the maps encoding the aabbs around the words"""
@@ -22,7 +21,7 @@ def encode(shape, gt, f=1.0):
         aabb = aabb.scale(f, f)
 
         # segmentation map
-        aabb_clip = AABB(0, shape[0] - 1, 0, shape[1] - 1)
+        aabb_clip = BoundingBox(0, shape[0] - 1, 0, shape[1] - 1)
 
         aabb_word = aabb.scale_around_center(0.5, 0.5).as_type(int).clip(aabb_clip)
         aabb_sur = aabb.as_type(int).clip(aabb_clip)
@@ -94,6 +93,6 @@ def decode(pred_map, comp_fg=fg_by_threshold(0.5), f=1):
         b = pred[MapOrdering.GEO_BOTTOM]
         l = pred[MapOrdering.GEO_LEFT]
         r = pred[MapOrdering.GEO_RIGHT]
-        aabb = AABB(xc - l, xc + r, yc - t, yc + b)
+        aabb = BoundingBox(xc - l, xc + r, yc - t, yc + b)
         aabbs.append(aabb.scale(f, f))
     return aabbs
